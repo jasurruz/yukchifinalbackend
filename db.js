@@ -1,11 +1,13 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  // Railway'dagi DATABASE_URL o'zgaruvchisidan hamma ma'lumotni oladi
-  connectionString: process.env.DATABASE_URL, 
-  ssl: {
-    rejectUnauthorized: false
-  }
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
+pool.connect((err) => {
+  if (err) console.error("Ulanish xatosi:", err.stack);
+  else console.log("Baza bilan muvaffaqiyatli bog'landik!");
 });
 
 module.exports = pool;
